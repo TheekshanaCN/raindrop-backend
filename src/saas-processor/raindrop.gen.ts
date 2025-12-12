@@ -12,5 +12,6 @@ export interface Env {
   logger: Logger;
   mem: KvCache;
   MONGODB_URI: string;
+  RAINDROP_API_KEY: string;
   tracer: Tracer;
 }

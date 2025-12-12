@@ -43,6 +43,36 @@ const app = new Hono<{ Bindings: Env }>();
 // Enable CORS
 app.use('/*', cors());
 
+// API Key Validation Middleware
+const validateApiKey = async (c: any, next: any) => {
+  const apiKey = c.req.header('x-api-key');
+  const expectedApiKey = c.env.RAINDROP_API_KEY;
+  
+  if (!apiKey) {
+    return c.json({ 
+      error: 'Missing API key',
+      message: 'x-api-key header is required'
+    }, 401);
+  }
+  
+  if (apiKey !== expectedApiKey) {
+    return c.json({ 
+      error: 'Invalid API key',
+      message: 'The provided API key is incorrect'
+    }, 401);
+  }
+  
+  await next();
+};
+
+// Apply API key validation to all API endpoints except health and root
+app.use('/process', validateApiKey);
+app.use('/tech-stack/*', validateApiKey);
+app.use('/mvp/*', validateApiKey);
+app.use('/prompt/*', validateApiKey);
+app.use('/ideas', validateApiKey);
+app.use('/idea/*', validateApiKey);
+
 // Request schemas
 const processSchema = z.object({
   text: z.string().min(1, "Idea text is required"),

@@ -4,6 +4,10 @@ application "hello-world" {
     default = ""
   }
 
+   env "RAINDROP_API_KEY" {
+    secret = true
+  }
+  
   service "saas-processor" {
     visibility = "public"
     domain {
