@@ -30,7 +30,7 @@ Built on the **Raindrop framework** and powered by the **Llama 3.3 70B** model, 
 ### Infrastructure Components
 - Public HTTP API service
 - AI SmartMemory layer
-- In-memory data store (hackathon mode)
+- In-memory data store
 - Vultr Cloud (planned):
   - Compute instances
   - Persistent storage
@@ -68,7 +68,7 @@ https://saas-processor.01kbdpscga0zef6c3hshmw5swq.lmapp.run
 
 ## 💾 Data & Storage Strategy
 
-### Current (Hackathon)
+### Current
 - Ultra-fast in-memory cache
 - No external dependencies
 - Optimized for speed and iteration
